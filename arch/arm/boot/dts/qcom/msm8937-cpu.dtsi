@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2015-2016, 2018, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -57,13 +57,12 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x100>;
 			enable-method = "psci";
-			qcom,acc = <&acc0>;
-			qcom,limits-info = <&mitigation_profile0>;
+			efficiency = <1126>;
+			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L2_1: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
-			      power-domain = <&l2ccc_1>;
 			      /* A53 L2 dump not supported */
 			      qcom,dump-size = <0x0>;
 			};
@@ -82,8 +81,8 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x101>;
 			enable-method = "psci";
-			qcom,acc = <&acc1>;
-			qcom,limits-info = <&mitigation_profile1>;
+			efficiency = <1126>;
+			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L1_I_101: l1-icache {
 				compatible = "arm,arch-cache";
@@ -100,8 +99,8 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x102>;
 			enable-method = "psci";
-			qcom,acc = <&acc2>;
-			qcom,limits-info = <&mitigation_profile2>;
+			efficiency = <1126>;
+			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L1_I_102: l1-icache {
 				compatible = "arm,arch-cache";
@@ -118,8 +117,8 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x103>;
 			enable-method = "psci";
-			qcom,acc = <&acc3>;
-			qcom,limits-info = <&mitigation_profile3>;
+			efficiency = <1126>;
+			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L1_I_103: l1-icache {
 				compatible = "arm,arch-cache";
@@ -136,13 +135,12 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x0>;
 			enable-method = "psci";
-			qcom,acc = <&acc4>;
-			qcom,limits-info = <&mitigation_profile4>;
+			efficiency = <1024>;
+			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L2_0: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
-			      power-domain = <&l2ccc_0>;
 			      qcom,dump-size = <0x0>;
 			};
 			L1_I_0: l1-icache {
@@ -160,8 +158,8 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x1>;
 			enable-method = "psci";
-			qcom,acc = <&acc5>;
-			qcom,limits-info = <&mitigation_profile4>;
+			efficiency = <1024>;
+			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L1_I_1: l1-icache {
 				compatible = "arm,arch-cache";
@@ -178,8 +176,8 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x2>;
 			enable-method = "psci";
-			qcom,acc = <&acc6>;
-			qcom,limits-info = <&mitigation_profile4>;
+			efficiency = <1024>;
+			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L1_I_2: l1-icache {
 				compatible = "arm,arch-cache";
@@ -196,8 +194,8 @@
 			compatible = "arm,cortex-a53";
 			reg = <0x3>;
 			enable-method = "psci";
-			qcom,acc = <&acc7>;
-			qcom,limits-info = <&mitigation_profile4>;
+			efficiency = <1024>;
+			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L1_I_3: l1-icache {
 				compatible = "arm,arch-cache";
@@ -208,58 +206,6 @@
 				qcom,dump-size = <0x9000>;
 			};
 		};
-	};
-};
-
-&soc {
-	l2ccc_0: clock-controller@b111000 {
-		compatible = "qcom,8937-l2ccc";
-		reg = <0x0b111000 0x1000>;
-	};
-
-	l2ccc_1: clock-controller@b011000 {
-		compatible = "qcom,8937-l2ccc";
-		reg = <0x0b011000 0x1000>;
-	};
-
-	acc0:clock-controller@b088000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b088000 0x1000>;
-	};
-
-	acc1:clock-controller@b098000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b098000 0x1000>;
-	};
-
-	acc2:clock-controller@b0a8000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b0a8000 0x1000>;
-	};
-
-	acc3:clock-controller@b0b8000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b0b8000 0x1000>;
-	};
-
-	acc4:clock-controller@b188000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b188000 0x1000>;
-	};
-
-	acc5:clock-controller@b198000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b198000 0x1000>;
-	};
-
-	acc6:clock-controller@b1a8000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b1a8000 0x1000>;
-	};
-
-	acc7:clock-controller@b1b8000 {
-		compatible = "qcom,arm-cortex-acc";
-		reg = <0x0b1b8000 0x1000>;
 	};
 
 	cpuss_dump {
@@ -337,6 +283,58 @@
 		qcom,l1_d_cache103 {
 			qcom,dump-node = <&L1_D_103>;
 			qcom,dump-id = <0x87>;
+		};
+
+	energy_costs: energy-costs {
+		compatible = "sched-energy";
+
+		CPU_COST_0: core-cost0 {
+			busy-cost-data = <
+				 700000  623
+				1000000  917
+				1100000  1106
+				1250000  1432
+				1400000  1740
+			>;
+			idle-cost-data = <
+				100 80 60 40
+			>;
+		};
+		CPU_COST_1: core-cost1 {
+			busy-cost-data = <
+				 500000  70
+				 800000  114
+				 900000  141
+				1000000  178
+				1100000  213
+			>;
+			idle-cost-data = <
+				40 20 10 8
+			>;
+		};
+		CLUSTER_COST_0: cluster-cost0 {
+			busy-cost-data = <
+				 500000  19
+				 800000  29
+				 900000  36
+				1000000  46
+				1100000  55
+			>;
+			idle-cost-data = <
+				4 3 2 1
+			>;
+		};
+		CLUSTER_COST_1: cluster-cost1 {
+			busy-cost-data = <
+				 700000  85
+				1000000  126
+				1100000  152
+				1250000  197
+				1400000  239
+			>;
+			idle-cost-data = <
+				4 3 2 1
+			>;
 		};
 	};
 };
