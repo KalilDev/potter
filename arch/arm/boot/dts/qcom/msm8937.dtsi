@@ -265,21 +265,18 @@
 		qcom,pipe-attr-ee;
 	};
 
-	tsens: tsens@4a8000 {
+	thermal_zones: thermal-zones {};
+
+	tsens0: tsens@4a8000 {
 		compatible = "qcom,msm8937-tsens";
-		reg = <0x4a8000 0x2000>,
-		      <0xa4000  0x1000>;
-		reg-names = "tsens_physical", "tsens_eeprom_physical";
+		reg = <0x4a8000 0x1000>,
+			<0x4a9000 0x1000>,
+			<0xa4000  0x1000>;
+		reg-names = "tsens_srot_physical",
+			"tsens_tm_physical", "tsens_eeprom_physical";
 		interrupts = <0 184 0>;
 		interrupt-names = "tsens-upper-lower";
-		qcom,sensors = <11>;
-		qcom,slope = <3200 3200 3200 3200 3200 3200 3200 3200 3200
-								3200 3200>;
-		qcom,sensor-id = <0 1 2 3 4 5 6 7 8 9 10>;
-		qcom,valid-status-check;
-		qcom,temp1-offset = <1 (-9) (-6) (-4) 0 (-3) (-2) 0 2 (-2)
-									(-3)>;
-		qcom,temp2-offset = <0 10 (-1) 5 (-2) (-9) (-13) 1 1 0 2>;
+		#thermal-sensor-cells = <1>;
 	};
 
 	slim_msm: slim@c140000{
@@ -1994,6 +1991,7 @@
 #include "msm8937-audio.dtsi"
 #include "msm8937-mdss.dtsi"
 #include "msm8937-mdss-pll.dtsi"
+#include "msm8937-thermal.dtsi"
 
 &gdsc_venus {
 	clock-names = "bus_clk", "core_clk";
